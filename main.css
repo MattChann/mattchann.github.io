@@ -1,7 +1,9 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: large;
     background-color: #292929;
     margin: 0;
+    color: #FB7D37;
 }
 
 .gradient {
@@ -52,12 +54,14 @@ body {
 .nav-head {
     font-size: 2em;
     font-weight: 800;
+    margin-left: 0.25em;
 }
 
 .nav-other {
     display: flex;
     justify-content: flex-end;
     flex-grow: 1;
+    gap: 0.3em;
     margin-right: 1em;
     font-size: 1.7em;
     font-weight: bold;
@@ -66,16 +70,31 @@ body {
 
 .nav-other * {
     color: inherit;
-    margin-left: 0.3em;
-    margin-right: 0.3em;
     text-decoration: none;
 }
-
-/* .nav-other a {
-    color: inherit;
-} */
 
 .about {
     background-color: #383838;
     padding: 2em;
+}
+
+.projects {
+    padding: 2em;
+    color: #FC953D;
+}
+
+footer {
+    background-color: #383838;
+    padding: 2em;
+    text-align: center;
+}
+
+.social-icons {
+    margin: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+    font-size: 1.5em;
 }
