@@ -27,6 +27,7 @@ body {
     align-items: center;
     height: 100vh;
     width: 100vw;
+    max-width: 100%;
     background: url(cloud-background.png) top center no-repeat;
     background-size: 100vw;
 }
@@ -61,8 +62,8 @@ body {
     display: flex;
     justify-content: flex-end;
     flex-grow: 1;
-    gap: 0.3em;
-    margin-right: 1em;
+    gap: 1em;
+    margin-right: 2em;
     font-size: 1.7em;
     font-weight: bold;
     color: #FB7D37;
@@ -75,12 +76,51 @@ body {
 
 .about {
     background-color: #383838;
-    padding: 2em;
+    padding: 3em;
 }
 
 .projects {
-    padding: 2em;
     color: #FC953D;
+    padding: 3em;
+}
+
+.project-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2em;
+}
+
+.project-card {
+    width: 20em;
+    height: 30em;
+    background-color: #383838;
+    padding: 1em;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.p-img {
+    max-width: 20em;
+    max-height: 13em;
+    border-radius: 0.2em;
+}
+
+.p-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    height: 1.5em;
+    margin: 0px;
+    margin-top: 1em;
+}
+
+.p-body {
+    flex-grow: 1;
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
 }
 
 footer {
