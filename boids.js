@@ -5,6 +5,7 @@ const BOID_COLOR = "#BDA3FF";
 const NUM_BOIDS = 150;
 const BOID_SIZE = 7;
 const MAX_SPEED = 2;
+const DETECT_RADIUS = 100;
 
 
 
@@ -14,30 +15,36 @@ class Vector {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-    }
+    };
     copy() {
         return new Vector(this.x, this.y);
-    }
+    };
     mult(scalar) {
         this.x *= scalar;
         this.y *= scalar;
-    }
+    };
     norm() {
         return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
-    }
+    };
     normalize() {
         const n = this.norm();
-        this.x /= n;
-        this.y /= n;
-    }
+        if (n) {
+            this.x /= n;
+            this.y /= n;
+        };
+    };
     setMag(magnitude) {
         this.normalize();
         this.mult(magnitude);
-    }
+    };
     add(vec) {
         this.x += vec.x;
         this.y += vec.y;
-    }
+    };
+    sub(vec) {
+        this.x -= vec.x;
+        this.y -= vec.y;
+    };
 };
 
 const VectorOps = {
@@ -54,7 +61,7 @@ class Boid {
         this.position = new Vector(x, y);
         const ang = Math.random() * 2 * Math.PI;
         this.velocity = new Vector(Math.cos(ang), Math.sin(ang));
-    }
+    };
     draw() {
         ctx.beginPath();
         let dir = this.velocity.copy();
@@ -65,7 +72,7 @@ class Boid {
         ctx.lineTo(this.position.x - dir.x + width.x, this.position.y - dir.y + width.y);
         ctx.lineTo(this.position.x - dir.x - width.x, this.position.y - dir.y - width.y);
         ctx.fill();
-    }
+    };
 };
 
 
@@ -81,13 +88,58 @@ const drawAll = function() {
     };
 };
 
-const separation = function() {};
-const alignment = function() {};
-const cohesion = function() {};
+const separation = function(boid) {
+    let c = new Vector(0, 0);
+
+    for (const other of boids) {
+        if (boid !== other) {
+            const diff = VectorOps.sub(other.position, boid.position);
+            if (diff.norm() < DETECT_RADIUS) {
+                c.sub(diff);
+            };
+        };
+    };
+
+    return c;
+};
+
+const alignment = function(boid) {
+    let p = new Vector(0, 0);
+
+    for (const other of boids) {
+        if (boid !== other) {
+            p.add(other.velocity);
+        };
+    };
+
+    p.mult(1 / (boids.length - 1));
+    p.sub(boid.velocity);
+    return p;
+};
+
+const cohesion = function(boid) {
+    let p = new Vector(0, 0);
+
+    for (const other of boids) {
+        if (boid !== other) {
+            p.add(other.position);
+        };
+    };
+
+    p.mult(1 / (boids.length - 1));
+    p.sub(boid.position);
+    return p;
+};
 
 const stepAll = function() {
     for (const boid of boids) {
-        
+        boid.velocity.add(separation(boid));
+        boid.velocity.add(alignment(boid));
+        boid.velocity.add(cohesion(boid));
+        if (boid.velocity.norm() > MAX_SPEED) {
+            boid.velocity.setMag(MAX_SPEED);
+        };
+        boid.position.add(boid.velocity);
     };
 };
 
