@@ -3,9 +3,11 @@ const ctx = canvas.getContext("2d");
 
 const BOID_COLOR = "#BDA3FF";
 const NUM_BOIDS = 150;
-const BOID_SIZE = 7;
-const MAX_SPEED = 2;
-const DETECT_RADIUS = 100;
+const BOID_SIZE = 5;
+const MAX_SPEED = 3.25;
+const MAX_ACCEL = 0.05;
+const DETECT_RADIUS = 50;
+const SEPARATION = 15;
 
 
 
@@ -90,16 +92,25 @@ const drawAll = function() {
 
 const separation = function(boid) {
     let c = new Vector(0, 0);
+    let num = 0;
 
     for (const other of boids) {
         if (boid !== other) {
-            const diff = VectorOps.sub(other.position, boid.position);
-            if (diff.norm() < DETECT_RADIUS) {
-                c.sub(diff);
+            const diff = VectorOps.sub(boid.position, other.position);
+            const dist = diff.norm();
+            if (dist < SEPARATION) {
+                diff.normalize();
+                diff.mult(1 / dist);
+                c.add(diff);
+                num++;
             };
         };
     };
 
+    if (num) c.mult(1 / num);
+    c.setMag(MAX_SPEED);
+    c.sub(boid.velocity);
+    if (c.norm() > MAX_SPEED) c.setMag(MAX_SPEED);
     return c;
 };
 
@@ -108,38 +119,68 @@ const alignment = function(boid) {
 
     for (const other of boids) {
         if (boid !== other) {
-            p.add(other.velocity);
+            const diff = VectorOps.sub(other.position, boid.position);
+            if (diff.norm() < DETECT_RADIUS) {
+                p.add(other.velocity);
+            };
         };
     };
 
-    p.mult(1 / (boids.length - 1));
+    p.setMag(MAX_SPEED);
     p.sub(boid.velocity);
+    if (p.norm() > MAX_SPEED) p.setMag(MAX_SPEED);
     return p;
 };
 
 const cohesion = function(boid) {
     let p = new Vector(0, 0);
+    let num = 0;
 
     for (const other of boids) {
         if (boid !== other) {
-            p.add(other.position);
+            const diff = VectorOps.sub(other.position, boid.position);
+            if (diff.norm() < DETECT_RADIUS) {
+                p.add(other.position);
+                num++;
+            };
         };
     };
 
-    p.mult(1 / (boids.length - 1));
+    if (num) p.mult(1 / num);
     p.sub(boid.position);
+    p.setMag(MAX_SPEED);
+    p.sub(boid.velocity);
+    p.setMag(MAX_SPEED);
+    // if (p.norm() > MAX_ACCEL) p.setMag(MAX_ACCEL);
     return p;
 };
 
 const stepAll = function() {
     for (const boid of boids) {
-        boid.velocity.add(separation(boid));
-        boid.velocity.add(alignment(boid));
-        boid.velocity.add(cohesion(boid));
-        if (boid.velocity.norm() > MAX_SPEED) {
-            boid.velocity.setMag(MAX_SPEED);
-        };
+        // Wraparound borders
+        if (boid.position.x <= 0) boid.position.x += canvas.width;
+        if (boid.position.y <= 0) boid.position.y += canvas.height;
+        if (boid.position.x > canvas.width) boid.position.x = 0;
+        if (boid.position.y > canvas.height) boid.position.y = 0;
+        console.log(`${boid.position.x}, ${boid.position.y}`)
+
+        const sep = separation(boid);
+        const ali = alignment(boid);
+        const coh = cohesion(boid);
+        sep.mult(2.5);
+        ali.mult(1.5);
+        coh.mult(1);
+
+        const steer = new Vector(0, 0);
+        steer.add(sep);
+        steer.add(ali);
+        steer.add(coh);
+        if (steer.norm() > MAX_ACCEL) steer.setMag(MAX_ACCEL);
+
+        boid.velocity.add(steer);
+        if (boid.velocity.norm() > MAX_SPEED) boid.velocity.setMag(MAX_SPEED);
         boid.position.add(boid.velocity);
+        console.log(boid.velocity)
     };
 };
 
