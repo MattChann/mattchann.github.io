@@ -1,13 +1,15 @@
 const canvas = document.getElementById("boids");
 const ctx = canvas.getContext("2d");
 
+let animationId;
+
 const BOID_COLOR = "#BDA3FF";
-const NUM_BOIDS = 150;
+const NUM_BOIDS = 400;
 const BOID_SIZE = 5;
-const MAX_SPEED = 3.25;
-const MAX_ACCEL = 0.05;
-const DETECT_RADIUS = 50;
-const SEPARATION = 15;
+const MAX_SPEED = 3;
+const MAX_ACCEL = 0.07;
+const DETECT_RADIUS = 70;
+const SEPARATION = 30;
 
 
 
@@ -150,7 +152,7 @@ const cohesion = function(boid) {
     p.sub(boid.position);
     p.setMag(MAX_SPEED);
     p.sub(boid.velocity);
-    p.setMag(MAX_SPEED);
+    if (p.norm() > MAX_SPEED) p.setMag(MAX_SPEED);
     // if (p.norm() > MAX_ACCEL) p.setMag(MAX_ACCEL);
     return p;
 };
@@ -162,14 +164,13 @@ const stepAll = function() {
         if (boid.position.y <= 0) boid.position.y += canvas.height;
         if (boid.position.x > canvas.width) boid.position.x = 0;
         if (boid.position.y > canvas.height) boid.position.y = 0;
-        console.log(`${boid.position.x}, ${boid.position.y}`)
 
         const sep = separation(boid);
         const ali = alignment(boid);
         const coh = cohesion(boid);
-        sep.mult(2.5);
-        ali.mult(1.5);
-        coh.mult(1);
+        sep.mult(4);
+        ali.mult(5);
+        coh.mult(2);
 
         const steer = new Vector(0, 0);
         steer.add(sep);
@@ -180,7 +181,6 @@ const stepAll = function() {
         boid.velocity.add(steer);
         if (boid.velocity.norm() > MAX_SPEED) boid.velocity.setMag(MAX_SPEED);
         boid.position.add(boid.velocity);
-        console.log(boid.velocity)
     };
 };
 
@@ -202,8 +202,16 @@ const animate = function(e) {
     drawAll();
     stepAll();
 
-    window.requestAnimationFrame(animate);
+    animationId = window.requestAnimationFrame(animate);
 };
 
 
 init();
+
+
+
+const stop = function(e) {
+    window.cancelAnimationFrame(animationId);
+};
+
+canvas.addEventListener("click", stop);
