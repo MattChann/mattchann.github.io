@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    font-family: 'SF Pro Display', sans-serif;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.stack {
+    display: grid;
+}
+
+.layer {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    max-width: 1400px;
+    width: 100vw;
+}
+
+#nameplate {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+#nameplate .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#nameplate .content h1 {
+    font-size: 288px;
+    font-weight: 900;
+    margin: 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+    background-size: 100%;
+    background-image: linear-gradient(45deg, #FF9900, #FFCF54);
+}
+
+#nameplate .content h3 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #775EB5;
+}
