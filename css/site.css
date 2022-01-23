@@ -5,6 +5,7 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
     font-family: 'SF Pro Display', sans-serif;
+    font-size: 28px;
 }
 
 body::-webkit-scrollbar {
@@ -26,7 +27,7 @@ body::-webkit-scrollbar {
 }
 
 .content {
-    max-width: 1400px;
+    max-width: 1200px;
     width: 100vw;
 }
 
@@ -53,11 +54,35 @@ body::-webkit-scrollbar {
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent;
     background-size: 100%;
-    background-image: linear-gradient(45deg, #FF9900, #FFCF54);
+    background-image: linear-gradient(60deg, #FF9900, #FFCF54);
+}
+
+h3 {
+    font-size: 36px;
+    font-weight: bold;
 }
 
 #nameplate .content h3 {
-    font-size: 36px;
-    font-weight: bold;
     color: #775EB5;
+    margin: 0;
+}
+
+.border {
+    width: 100%;
+    display: block;
+}
+
+#about {
+    width: 100vw;
+    height: 100vh;
+    background-color: #4A4063;
+    color: #FFFFFF;
+}
+
+#about-content {
+    max-width: 1200px;
+    /* width: 100vw; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
