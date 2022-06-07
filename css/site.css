@@ -58,7 +58,7 @@ body::-webkit-scrollbar {
 }
 
 h3 {
-    font-size: 36px;
+    font-size: 40px;
     font-weight: bold;
 }
 
@@ -84,5 +84,46 @@ h3 {
     /* width: 100vw; */
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    gap: 0px 50px
+}
+
+#headshot {
+    border-style: solid;
+    border-color: #8170AE;
+    border-radius: 100%;
+    border-width: 25px;
+}
+
+#about-text {
+    flex-shrink: 2;
+    max-width: 550px;
+}
+
+#about-content h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#cornell {
+    color: #EF4035;
+}
+
+#breakfree {
+    color: #F95656;
+}
+
+#strike {
+    text-decoration: line-through;
+}
+
+#coffee {
+    color: #DCB090;
 }
