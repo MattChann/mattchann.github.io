@@ -218,8 +218,8 @@ init();
 
 
 
-const stop = function(e) {
-    window.cancelAnimationFrame(animationId);
-};
+// const stop = function(e) {
+//     window.cancelAnimationFrame(animationId);
+// };
 
-canvas.addEventListener("click", stop);
+// canvas.addEventListener("click", stop);
