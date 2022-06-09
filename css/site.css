@@ -5,7 +5,7 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
     font-family: 'SF Pro Display', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 body::-webkit-scrollbar {
@@ -51,6 +51,7 @@ nav div {
 .center {
     display: flex;
     justify-content: center;
+    align-content: center;
 }
 
 .content {
@@ -121,10 +122,9 @@ h3 {
 
 #about-content {
     max-width: 1000px;
-    /* width: 100vw; */
     display: flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
+    justify-content: center;
     align-items: center;
     gap: 0px 50px;
 }
@@ -133,7 +133,7 @@ h3 {
     border-style: solid;
     border-color: #8170AE;
     border-radius: 100%;
-    border-width: 25px;
+    border-width: 2vw;
     width: 40%;
 }
 
@@ -142,7 +142,7 @@ h3 {
 }
 
 h4 {
-    font-size: 24px;
+    font-size: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -242,6 +242,11 @@ footer {
 @media (max-width: 1100px) {
     #about-content {
         flex-direction: column;
+    }
+
+    #headshot {
+        width: 50%;
+        
     }
 
     .project {
