@@ -74,7 +74,7 @@ h3 {
 
 #about {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #4A4063;
     color: #FFFFFF;
 }
@@ -136,6 +136,7 @@ p {
     flex-direction: column;
     align-items: center;
     row-gap: 70px;
+    margin-bottom: 70px;
 }
 
 .project {
@@ -167,10 +168,20 @@ p {
 }
 
 .tags span {
+    font-size: 16px;
     margin: 0;
     background-color: #FFEEC2;
     border-style: solid;
     border-color: #FFEEC2;
     border-width: 5px 10px;
     border-radius: 30px;
+}
+
+footer {
+    background-color: #FFEEC2;
+    padding: 30px;
+    color: #FF9900;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
 }
