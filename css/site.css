@@ -71,7 +71,7 @@ nav div {
     flex-direction: column;
 }
 
-#nameplate .content h1 {
+h1 {
     font-size: 210px;
     font-weight: 900;
     margin: 0;
@@ -124,10 +124,9 @@ h3 {
     width: 40%;
 }
 
-/* #about-text {
-    flex-shrink: 2;
-    max-width: 550px;
-} */
+#about-text {
+    width: 70%;
+}
 
 h4 {
     font-size: 24px;
@@ -184,6 +183,10 @@ p {
     width: 50%;
 }
 
+#project-desc h4 {
+    margin: 0;
+}
+
 .tags {
     color: #FF9900;
     font-size: 20px;
@@ -211,4 +214,28 @@ footer {
     font-size: 16px;
     font-weight: 500;
     text-align: center;
+}
+
+@media (max-width: 900px) {
+    h1 {
+        font-size: 100px;
+    }
+
+    h3 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 1100px) {
+    #about-content {
+        flex-direction: column;
+    }
+
+    .project {
+        flex-direction: column;
+    }
+
+    #project-desc {
+        width: 70%;
+    }
 }

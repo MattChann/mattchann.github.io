@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 let animationId;
 
 const BOID_COLOR = "#BDA3FF";
-const NUM_BOIDS = 400;
+const NUM_BOIDS = 250;
 const BOID_SIZE = 5;
 const MAX_SPEED = 3;
 const MAX_ACCEL = 0.07;
