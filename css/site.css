@@ -175,7 +175,19 @@ p {
     flex-direction: column;
     align-items: center;
     row-gap: 70px;
+    margin-top: 100px;
     margin-bottom: 70px;
+}
+
+#projects h3 {
+    color: #FF9900;
+    margin: 0;
+}
+
+#projects h4 {
+    color: #FF9900;
+    margin: 0;
+    margin-top: 10px;
 }
 
 .project {
@@ -197,6 +209,7 @@ p {
 }
 
 #project-desc h4 {
+    color: #775EB5;
     margin: 0;
 }
 
@@ -246,7 +259,6 @@ footer {
 
     #headshot {
         width: 50%;
-        
     }
 
     .project {
