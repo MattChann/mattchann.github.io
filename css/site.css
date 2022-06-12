@@ -190,6 +190,29 @@ p {
     margin-top: 10px;
 }
 
+a {
+    color: inherit;
+    text-decoration: inherit;
+    position: relative;
+}
+
+a:after {
+    content: "";
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background-image: url('../img/link-arrow.svg');
+    background-size: cover;
+    transition: top 300ms ease-in-out, right 300ms ease-in-out;
+    top: -5px;
+    right: -20px;
+}
+
+a:hover:after {
+    top: -10px;
+    right: -25px;
+}
+
 .project {
     width: 1000px;
     max-width: 100%;
