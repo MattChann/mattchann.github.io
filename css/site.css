@@ -5,7 +5,7 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
     font-family: 'SF Pro Display', sans-serif;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 body::-webkit-scrollbar {
@@ -121,12 +121,12 @@ h3 {
 }
 
 #about-content {
-    max-width: 1000px;
+    max-width: 900px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0px 50px;
+    column-gap: 50px;
 }
 
 #headshot {
@@ -142,7 +142,7 @@ h3 {
 }
 
 h4 {
-    font-size: 20px;
+    font-size: 24px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -174,17 +174,17 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 70px;
-    margin-top: 100px;
+    row-gap: 90px;
+    margin-top: 120px;
     margin-bottom: 70px;
 }
 
-#projects h3 {
+#projects-title h3 {
     color: #FF9900;
     margin: 0;
 }
 
-#projects h4 {
+#projects-title h4 {
     color: #FF9900;
     margin: 0;
     margin-top: 10px;
@@ -214,21 +214,20 @@ a:hover:after {
 }
 
 .project {
-    width: 1000px;
-    max-width: 100%;
+    max-width: 700px;
     display: flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
     align-items: center;
-    gap: 0px 50px;
+    column-gap: 50px;
 }
 
 .project img {
-    width: 45%;
+    width: 40%;
+    border-radius: 30px;
 }
 
 #project-desc {
-    width: 50%;
+    width: 60%;
 }
 
 #project-desc h4 {
@@ -286,6 +285,7 @@ footer {
 
     .project {
         flex-direction: column;
+        row-gap: 30px;
     }
 
     #project-desc {
