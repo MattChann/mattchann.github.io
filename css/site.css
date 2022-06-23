@@ -199,8 +199,8 @@ a {
 a:after {
     content: "";
     position: absolute;
-    width: 1em;
-    height: 1em;
+    width: 0.9em;
+    height: 0.9em;
     background-image: url('../img/link-arrow.svg');
     background-size: cover;
     transition: top 300ms ease-in-out, right 300ms ease-in-out;
