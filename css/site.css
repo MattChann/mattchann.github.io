@@ -169,6 +169,27 @@ p {
     color: #DCB090;
 }
 
+#about-text a {
+    color: inherit;
+    text-decoration: inherit;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+    background: 
+        linear-gradient(to right, rgba(129, 112, 174), rgba(129, 112, 174)),
+        linear-gradient(to right, rgb(214, 197, 255), rgb(214, 197, 255));
+    background-size: 100% 0.1em, 0 0.1em;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms;
+}
+  
+#about-text a:hover,
+#about-text a:focus {
+    background-size: 0 0.1em, 100% 0.1em;
+}
+
 #projects {
     color: #775EB5;
     display: flex;
@@ -190,13 +211,13 @@ p {
     margin-top: 10px;
 }
 
-a {
+#projects a {
     color: inherit;
     text-decoration: inherit;
     position: relative;
 }
 
-a:after {
+#projects a:after {
     content: "";
     position: absolute;
     width: 0.9em;
@@ -208,7 +229,7 @@ a:after {
     right: -20px;
 }
 
-a:hover:after {
+#projects a:hover:after {
     top: -10px;
     right: -25px;
 }
