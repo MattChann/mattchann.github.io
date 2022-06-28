@@ -13,14 +13,6 @@ const SEPARATION = 30;
 
 
 
-
-
-const resize = function(e) {
-    ctx.canvas.width  = window.innerWidth;
-    ctx.canvas.height = window.innerHeight;
-    ctx.fillStyle = BOID_COLOR;
-};
-
 class Vector {
     constructor(x, y) {
         this.x = x;
@@ -87,10 +79,7 @@ class Boid {
 
 
 
-
-
 let boids = [];
-
 
 const drawAll = function() {
     for (const boid of boids) {
@@ -192,12 +181,38 @@ const stepAll = function() {
 
 
 
+const resize = function(e) {
+    ctx.canvas.width  = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
+    ctx.fillStyle = BOID_COLOR;
+};
+
+const addBoid = function() {
+    boids.push(new Boid(Math.random() * canvas.width, Math.random() * canvas.height));
+};
+
+const population = function() {
+    const area = ctx.canvas.width * ctx.canvas.height;
+    const boid_amount = Math.floor(area * (2 / 17725) + (25250 / 709));
+
+    if (boid_amount > boids.length) {
+        for (let i = 0; i < boid_amount - boids.length; i++) {
+            addBoid();
+        }
+    }
+    if (boid_amount < boids.length) {
+        for (let i = 0; i < boids.length - boid_amount; i++) {
+            boids.pop();
+        }
+    }
+};
+
 const init = function() {
     resize();
     ctx.fillStyle = BOID_COLOR;
 
     for (let x = 0; x < NUM_BOIDS; x++) {
-        boids.push(new Boid(Math.random() * canvas.width, Math.random() * canvas.height));
+        addBoid();
     };
     drawAll();
 
@@ -206,6 +221,7 @@ const init = function() {
 
 const animate = function(e) {
     resize();
+    population();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawAll();
     stepAll();
