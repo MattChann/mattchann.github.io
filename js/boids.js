@@ -1,8 +1,11 @@
+// Reference canvas element and context
 const canvas = document.getElementById("boids");
 const ctx = canvas.getContext("2d");
 
+// Store animation id (for stopping/pausing)
 let animationId;
 
+// Define constants
 const BOID_COLOR = "#BDA3FF";
 const NUM_BOIDS = 250;
 const BOID_SIZE = 5;
@@ -13,6 +16,7 @@ const SEPARATION = 30;
 
 
 
+// Vector class to handle vector calculations
 class Vector {
     constructor(x, y) {
         this.x = x;
@@ -49,6 +53,7 @@ class Vector {
     };
 };
 
+// Define other vector operations (without side effects)
 const VectorOps = {
     add: function(vec1, vec2) {
         return new Vector(vec1.x + vec2.x, vec1.y + vec2.y);
@@ -58,6 +63,7 @@ const VectorOps = {
     },
 };
 
+// Boid class to define information needed to display and move a boid
 class Boid {
     constructor(x, y) {
         this.position = new Vector(x, y);
@@ -79,14 +85,17 @@ class Boid {
 
 
 
+// Array of all boids
 let boids = [];
 
+// Draw all boids on the canvas
 const drawAll = function() {
     for (const boid of boids) {
         boid.draw();
     };
 };
 
+// Boid algorithm separation rule calculation
 const separation = function(boid) {
     let c = new Vector(0, 0);
     let num = 0;
@@ -111,6 +120,7 @@ const separation = function(boid) {
     return c;
 };
 
+// Boid algorithm alignment rule calculation
 const alignment = function(boid) {
     let p = new Vector(0, 0);
 
@@ -129,6 +139,7 @@ const alignment = function(boid) {
     return p;
 };
 
+// Boid algorithm cohesion rule calculation
 const cohesion = function(boid) {
     let p = new Vector(0, 0);
     let num = 0;
@@ -152,6 +163,7 @@ const cohesion = function(boid) {
     return p;
 };
 
+// Move all boids one step according to boid algorithm rules
 const stepAll = function() {
     for (const boid of boids) {
         // Wraparound borders
@@ -181,16 +193,19 @@ const stepAll = function() {
 
 
 
+// Resize canvas to full window size
 const resize = function(e) {
     ctx.canvas.width  = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
     ctx.fillStyle = BOID_COLOR;
 };
 
+// Add a new boid
 const addBoid = function() {
     boids.push(new Boid(Math.random() * canvas.width, Math.random() * canvas.height));
 };
 
+// Change boid amount based on canvas/window size
 const population = function() {
     const area = ctx.canvas.width * ctx.canvas.height;
     const boid_amount = Math.floor(area * (2 / 17725) + (25250 / 709));
@@ -207,6 +222,7 @@ const population = function() {
     }
 };
 
+// Initialize all boids and start animation
 const init = function() {
     resize();
     ctx.fillStyle = BOID_COLOR;
@@ -219,6 +235,7 @@ const init = function() {
     window.requestAnimationFrame(animate);
 };
 
+// Animate boids and handle responsiveness
 const animate = function(e) {
     resize();
     population();
@@ -229,11 +246,11 @@ const animate = function(e) {
     animationId = window.requestAnimationFrame(animate);
 };
 
-
+// Start animation on load
 init();
 
 
-
+// Temporary animation pause for debugging
 // const stop = function(e) {
 //     window.cancelAnimationFrame(animationId);
 // };
