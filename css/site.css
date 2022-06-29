@@ -72,12 +72,12 @@ h1 {
 	}
 } */
 
-h3 {
+h2 {
     font-size: 38px;
     font-weight: bold;
 }
 
-#nameplate .content h3 {
+#nameplate .content h2 {
     color: #775EB5;
     margin: 0;
 }
@@ -166,6 +166,11 @@ p {
 }
 
 /* Projects Section */
+h3 {
+    font-size: 38px;
+    font-weight: bold;
+}
+
 #projects {
     color: #775EB5;
     display: flex;
@@ -174,6 +179,10 @@ p {
     row-gap: 90px;
     margin-top: 120px;
     margin-bottom: 70px;
+}
+
+#projects-title {
+    max-width: 70%;
 }
 
 #projects-title h3 {
@@ -268,7 +277,7 @@ footer {
         font-size: 100px;
     }
 
-    h3 {
+    h2 {
         font-size: 32px;
     }
     #about-content {
@@ -294,7 +303,15 @@ footer {
         font-size: 50px;
     }
 
-    h3 {
+    h2, h3 {
         font-size: 20px;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+    
+    body {
+        font-size: 16px;
     }
 }
