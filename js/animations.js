@@ -17,7 +17,7 @@ gsap.to("#top-border > path", {
     repeat: -1,
     yoyo: true,
     yoyoEase: "sine",
-    repeatDelay: 0.05
+    repeatDelay: 0.0
 });
 gsap.to("#bot-border > path", {
     duration: 4,
