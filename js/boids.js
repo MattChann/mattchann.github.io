@@ -9,10 +9,10 @@ let animationId;
 const BOID_COLOR = "#BDA3FF";
 const NUM_BOIDS = 250;
 const BOID_SIZE = 5;
-const MAX_SPEED = 3;
-const MAX_ACCEL = 0.07;
-const DETECT_RADIUS = 70;
-const SEPARATION = 30;
+const MAX_SPEED = 3.5;
+const MAX_ACCEL = 0.03;
+const DETECT_RADIUS = 100;
+const SEPARATION = 50;
 
 
 
@@ -123,16 +123,19 @@ const separation = function(boid) {
 // Boid algorithm alignment rule calculation
 const alignment = function(boid) {
     let p = new Vector(0, 0);
+    let num = 0;
 
     for (const other of boids) {
         if (boid !== other) {
             const diff = VectorOps.sub(other.position, boid.position);
             if (diff.norm() < DETECT_RADIUS) {
                 p.add(other.velocity);
+                num++;
             };
         };
     };
 
+    if (num) p.mult(1 / num); // Average the velocities
     p.setMag(MAX_SPEED);
     p.sub(boid.velocity);
     if (p.norm() > MAX_SPEED) p.setMag(MAX_SPEED);
@@ -175,9 +178,9 @@ const stepAll = function() {
         const sep = separation(boid);
         const ali = alignment(boid);
         const coh = cohesion(boid);
-        sep.mult(4);
-        ali.mult(5);
-        coh.mult(2);
+        sep.mult(1.04);
+        ali.mult(0.7);
+        coh.mult(0.95);
 
         const steer = new Vector(0, 0);
         steer.add(sep);
